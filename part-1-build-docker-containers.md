@@ -2,7 +2,9 @@
 
 \#\# 第一步：在Mac构建Django 容器
 
-&gt; 原文：\[Quickstart: Compose and Django\]\("[https://docs.docker.com/compose/django/\#create-a-django-project"\](https://docs.docker.com/compose/django/#create-a-django-project"\)\)
+
+
+&gt; 原文：\[Quickstart: Compose and Django\]\("https://docs.docker.com/compose/django/\#create-a-django-project"\)  
 
 &gt; 翻译整理：CK
 
@@ -10,17 +12,21 @@
 
 这篇文章将指导你如何用Docker Compose 配置和启动一个简单的 Django + PostgreSQL 应用。请先确保您已安装Compose：
 
-\[Install Docker Compose\]\("[https://docs.docker.com/compose/install/"\](https://docs.docker.com/compose/install/"\)\)
+\[Install Docker Compose\]\("https://docs.docker.com/compose/install/"\)
+
+
 
 \*\*定义您的项目组件\*\*
+
+
 
 您需要创建一个Dockerfile 和一个Python 依赖文件，以及一个docker-compose.yml文件
 
 1. 创建一个项目目录
 
-2. 创建一个新的Dockerfile在当前项目目录下
+1. 创建一个新的Dockerfile在当前项目目录下
 
-3. 添加内容到Dockerfile
+1. 添加内容到Dockerfile
 
 \`\`\`
 
@@ -40,13 +46,15 @@ ADD . /code/
 
 \`\`\`
 
-1. 保存Dockerfile
 
-2. 创建一个 requirements.txt
+
+4. 保存Dockerfile
+
+5. 创建一个 requirements.txt
 
 Dockerfile 中的 \`RUN pip install -r requirements.txt\` 将会用到它
 
-1. 添加所需的软件到requirements.txt
+6. 添加所需的软件到requirements.txt
 
 \`\`\`
 
@@ -56,9 +64,9 @@ psycopg2
 
 \`\`\`
 
-1. 保存requirements.txt
+7. 保存requirements.txt
 
-2. 创建一个docker-compose.yml
+8. 创建一个docker-compose.yml
 
 docker-compose.yml文件里描述了您的app所需要的服务。compose一词我认为翻译为编制更恰当。在这里我们需要一个web服务器，一个数据服务器。编制文件指明了我们这些服务所用的镜像，他们如何连接，哪些卷要挂载到容器。最后定义服务端口。
 
@@ -66,105 +74,105 @@ docker-compose.yml文件里描述了您的app所需要的服务。compose一词�
 
 version: '3'
 
+
+
 services:
 
-db:
+  db:
 
-```
-image: postgres
-```
+    image: postgres
 
-web:
+  web:
 
-```
-build: .
+    build: .
 
-command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
 
-volumes:
+    volumes:
 
-  - .:/code
+      - .:/code
 
-ports:
+    ports:
 
-  - "8000:8000"
+      - "8000:8000"
 
-depends\_on:
+    depends\_on:
 
-  - db
-```
+      - db
 
 \`\`\`
 
-1. 保存 docker-compose.yml
+9. 保存 docker-compose.yml
+
+
 
 \*\*创建一个Django项目\*\*
 
 1. 转到项目根目录
 
-2. 用docker-compose 创建项目
+1. 用docker-compose 创建项目
 
 \`\`\`
 
-docker-compose run web django-admin.py startproject composeexample .
+docker-compose run web django-admin.py startproject composeexample . 
 
 \`\`\`
 
 docker将启动web容器，并在里面执行 django-admin.py startproject composeexample，因为web镜像不存在所以compose先从当前目录建立它，见 build: 因为挂在了当前目录，所以新创建的项目文件在\`docker-compose run\`执行完推出后可以看到
 
-1. ls 项目目录
+3. ls 项目目录
 
 \`\`\`
 
 $ ls -l
 
-drwxr-xr-x 2 root   root   composeexample
+ drwxr-xr-x 2 root   root   composeexample
 
--rw-rw-r-- 1 user   user   docker-compose.yml
+ -rw-rw-r-- 1 user   user   docker-compose.yml
 
--rw-rw-r-- 1 user   user   Dockerfile
+ -rw-rw-r-- 1 user   user   Dockerfile
 
--rwxr-xr-x 1 root   root   manage.py
+ -rwxr-xr-x 1 root   root   manage.py
 
--rw-rw-r-- 1 user   user   requirements.txt
+ -rw-rw-r-- 1 user   user   requirements.txt
 
-\`\`\`
+ \`\`\`
 
-\*\*连接数据库\*\*
+ 
+
+ \*\*连接数据库\*\*
 
 1. 打开composeexample/settings.py
 
-2. 替换DATABASE = …项
+1. 替换DATABASE = …项
 
 \`\`\`
 
 DATABASES = {
 
-```
-'default': {
+    'default': {
 
-    'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
 
-    'NAME': 'postgres',
+        'NAME': 'postgres',
 
-    'USER': 'postgres',
+        'USER': 'postgres',
 
-    'HOST': 'db',
+        'HOST': 'db',
 
-    'PORT': 5432,
+        'PORT': 5432,
 
-}
-```
+    }
 
-}
+} 
 
 \`\`\`
 
 这些参数是根据docker-compose.yml所指定的postgres Docker 镜像决定的。
 
-1. 保存
+3. 保存
 
-2. 执行docker-compose up
+4. 执行docker-compose up
 
 \`\`\`
 
@@ -190,23 +198,27 @@ db\_1   \| The default database encoding has accordingly been set to "UTF8".
 
 db\_1   \| The default text search configuration will be set to "english".
 
+
+
 . . .
+
+
 
 web\_1  \| May 30, 2017 - 21:44:49
 
 web\_1  \| Django version 1.11.1, using settings 'composeexample.settings'
 
-web\_1  \| Starting development server at [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
+web\_1  \| Starting development server at http://0.0.0.0:8000/
 
 web\_1  \| Quit the server with CONTROL-C.
 
 \`\`\`
 
-此时，你的Django app应该运行在8000端口上了。浏览器打开[http://localhost:8000应该能看到](http://localhost:8000应该能看到)
+此时，你的Django app应该运行在8000端口上了。浏览器打开http://localhost:8000应该能看到
 
-!\[image\]\([https://docs.docker.com/compose/images/django-it-worked.png\](https://docs.docker.com/compose/images/django-it-worked.png\)\)
+!\[image\]\(https://docs.docker.com/compose/images/django-it-worked.png\)
 
-1. 列出所有容器：
+5. 列出所有容器：
 
 \`\`\`
 
@@ -220,17 +232,19 @@ def85eff5f51        django\_web          "python3 manage.py..."   10 minutes ago
 
 \`\`\`
 
-1. 关闭容器  
+6. 关闭容器  
 
-Ctrl-C
+Ctrl-C  
 
 或者新开一个terminal执行： \`docker-compose down\`
 
+
+
 \#\# \*\*部署已有的项目到容器\*\*
+
+
 
 1. 将docker-compose.yml requirements.txt Dockerfile 拷贝到Django项目的根目录，应与manage.py同目录
 
 2. 运行\`docker-compose up\`
-
-
 
