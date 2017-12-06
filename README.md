@@ -1,10 +1,10 @@
-# Mac Docker 创建第一个Django 应用，Part 1
-
-> 原文：\[Quickstart: Compose and Django\]\("https://docs.docker.com/compose/django/\#create-a-django-project"\)
+\# Mac Docker 创建第一个Django 应用
 
 
 
-> 翻译整理：CK
+&gt; 原文：\[Quickstart: Compose and Django\]\("https://docs.docker.com/compose/django/\#create-a-django-project"\) 
 
+&gt; 
 
+&gt; 翻译整理：CK
 
