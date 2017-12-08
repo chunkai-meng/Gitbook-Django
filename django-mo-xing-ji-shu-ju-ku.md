@@ -68,7 +68,7 @@ class AccessRecord(models.Model):
 
 * 移植
 
-```
+```bash
 root@38c80f8e29c3:/code# python manage.py migrate
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, sessions
