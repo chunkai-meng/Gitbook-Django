@@ -182,7 +182,7 @@ $ python manage.py shell
 
 可进行一下尝试了解API：
 
-```
+```bash
 >>> from polls.models import Question, Choice   # Import the model classes we just wrote.
 
 # No questions are in the system yet.
@@ -243,7 +243,7 @@ class Choice(models.Model):
 
 除了那些常见的Python方法，可以添加一个自定义的
 
-```
+```py
 import datetime
 
 from django.db import models
