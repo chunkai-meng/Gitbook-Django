@@ -182,7 +182,7 @@ $ python manage.py shell
 
 可进行一下尝试了解API：
 
-```
+```bash
 >>> from polls.models import Question, Choice   # Import the model classes we just wrote.
 
 # No questions are in the system yet.
