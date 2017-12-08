@@ -1,7 +1,7 @@
 # Mac Docker 创建第一个Django 应用，Part 2
 
 > 原文：[Writing your first Django app, part 2](https://docs.djangoproject.com/en/1.11/intro/tutorial02/)  
-本文Python搭建在 Django Compose + Djang 执行Python需进入web server容器中，请参看[第一步：在Mac构建Django 容器]  
+> 本文Python搭建在 Django Compose + Djang 执行Python需进入web server容器中，请参看\[第一步：在Mac构建Django 容器\]  
 > 翻译整理：CK
 
 ## Part 2：配置后端
@@ -32,15 +32,20 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 bf1ef3b74f1b        mysite_web          "python3 manage.py..."   About an hour ago   Up 13 minutes       0.0.0.0:8000->8000/tcp   mysite_web_1
 09f6cebc8741        postgres            "docker-entrypoint..."   2 hours ago         Up 13 minutes       5432/tcp                 mysite_db_1
 ```
+
 进入容器并执行migrate：
+
 ```
 docker exec -it mysite_db_1 bash
 $ python manage.py migrate
 ```
-这条命令根据myiste/settings.py里的 INSTALLED_APPS 的需要安装必要数据库表格，安装完成后再连接PostgreSQL `psql DBNAME USERNAME`
+
+这条命令根据myiste/settings.py里的 INSTALLED\_APPS 的需要安装必要数据库表格，安装完成后再连接PostgreSQL `psql DBNAME USERNAME`
+
 ```
 root@09f6cebc8741:/# psql postgres postgres
 ```
+
 输入`\dt` 应该能看到类似Tables
 
 ```
@@ -62,6 +67,7 @@ postgres=# \dt
 ```
 
 退出Postgres
+
 ```
 postgres-# \q
 ```
@@ -69,7 +75,8 @@ postgres-# \q
 ### 2. 创建数据模型
 
 编辑`polls/models.py`
-```python
+
+```py
 from django.db import models
 
 
@@ -85,10 +92,11 @@ class Choice(models.Model):
 ```
 
 ### 3. 启动数据模型
+
 1. 通知Prject，polls app 应用已安装
 
-    编辑mysite/settings.py，添加一行`'polls.apps.PollsConfig',`
-    
+   编辑mysite/settings.py，添加一行`'polls.apps.PollsConfig',`
+
 ```
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
@@ -101,13 +109,13 @@ INSTALLED_APPS = [
 ]
 ```
 
-
-2. 到web容器中执行命令：
+1. 到web容器中执行命令：
 
 ```
 $ python manage.py makemigrations polls
 ```
-makemigrations 告诉Django你对模型做了些修改，并并希望保存下来。Django会创建修改脚本polls/migrations/0001_initial.py，
+
+makemigrations 告诉Django你对模型做了些修改，并并希望保存下来。Django会创建修改脚本polls/migrations/0001\_initial.py，  
 应该会看到类似：
 
 ```
@@ -119,11 +127,13 @@ Migrations for 'polls':
 ```
 
 到此数据库并未改变，真正执行变更并且帮助你管理数据库模式是`migration`命令，可以用如下命令查看将要执行的SQL命令
+
 ```
 $ python manage.py sqlmigrate polls 0001
 ```
 
 应该会看到类似（不同数据库会有所不同）：
+
 ```
 BEGIN;
 --
@@ -144,6 +154,7 @@ COMMIT;
 ```
 
 保存数据库修改：
+
 ```
 $ python manage.py migrate
 Operations to perform:
@@ -152,20 +163,25 @@ Running migrations:
   Rendering model states... DONE
   Applying polls.0001_initial... OK
 ```
-小结：
-修改数据库分三步：
-1. 修改模型 (in models.py).
-1. 执行: `python manage.py makemigrations` 创建一个迁移
+
+小结：  
+修改数据库分三步：  
+1. 修改模型 \(in models.py\).  
+1. 执行: `python manage.py makemigrations` 创建一个迁移  
 1. 执行：`python manage.py migrate` 保存变更
 
 ### 4. API
+
 下面进入交互式的Python Shell跟API一起玩耍吧，别忘了先进入容器。
+
 ```
 $ python manage.py shell
 ```
+
 如需了解database API的相关内容[：database API](https://docs.djangoproject.com/en/1.11/topics/db/queries/)
 
 可进行一下尝试了解API：
+
 ```
 >>> from polls.models import Question, Choice   # Import the model classes we just wrote.
 
@@ -205,9 +221,10 @@ datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
 <QuerySet [<Question: Question object>]>
 ```
 
-为了让`<Question: Question object>`输出更可读
-给模块Question and Choice (in the polls/models.py file) 添加 `__str__()` 方法 
-```
+为了让`<Question: Question object>`输出更可读  
+给模块Question and Choice \(in the polls/models.py file\) 添加 `__str__()` 方法
+
+```py
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -225,6 +242,7 @@ class Choice(models.Model):
 ```
 
 除了那些常见的Python方法，可以添加一个自定义的
+
 ```
 import datetime
 
@@ -239,6 +257,7 @@ class Question(models.Model):
 ```
 
 在次进入shell看看有哪些变化：
+
 ```
 >>> from polls.models import Question, Choice
 
@@ -320,9 +339,11 @@ True
 ### 5. 介绍Django Admin
 
 #### 1. 创建Admin用户
+
 ```
 $ python manage.py createsuperuser
 ```
+
 ```
 Username: admin
 ```
@@ -332,19 +353,22 @@ Email address: admin@example.com
 ```
 
 验证两次密码：
+
 ```
 Password: **********
 Password (again): *********
 Superuser created successfully.
 ```
+
 注册成功
 
 #### 2. 开始服务器开发
+
 Django的Admin是默认激活的
 
-启动服务器 `docker-compose up`  
+启动服务器 `docker-compose up`
 
-打开： http://127.0.0.1:8000/admin/
+打开： [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
 ![image](https://docs.djangoproject.com/en/1.11/_images/admin01.png)
 
@@ -353,7 +377,9 @@ Django的Admin是默认激活的
 ![image](https://docs.djangoproject.com/en/1.11/_images/admin02.png)
 
 #### 3. 通过admin来管理poll应用
+
 修改**polls/admin.py** 注册Question到admin site 来告诉admin Question 已经提供了admin的接口
+
 ```
 from django.contrib import admin
 
@@ -372,11 +398,13 @@ admin.site.register(Question)
 
 ![image](https://docs.djangoproject.com/en/1.11/_images/admin05t.png)
 
-如果选择时间**Now**的时候发现时间不对，那可能就是时区问题。
+如果选择时间**Now**的时候发现时间不对，那可能就是时区问题。  
 检查之前的设置`mysite/setting.py` 例如：
+
 ```
 #TIME_ZONE = 'UTC'
 TIME_ZONE = 'Pacific/Auckland'
 ```
+
 好了，完成第二步了
 
