@@ -11,8 +11,8 @@
 
 您需要创建一个Dockerfile 和一个Python 依赖文件，以及一个docker-compose.yml文件
 1. 创建一个项目目录
-1. 创建一个新的Dockerfile在当前项目目录下
-1. 添加内容到Dockerfile
+2. 创建一个新的Dockerfile在当前项目目录下
+3. 添加内容到Dockerfile
 ```
 FROM python:3
 ENV PYTHONUNBUFFERED 1
