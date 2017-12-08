@@ -243,7 +243,7 @@ class Choice(models.Model):
 
 除了那些常见的Python方法，可以添加一个自定义的
 
-```
+```py
 import datetime
 
 from django.db import models
