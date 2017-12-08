@@ -4,24 +4,23 @@
 
 ## 1. 模型及数据库
 
-### 说明： 
+### 说明：
 
-+ We use Models to incorporate Database into a Django Project
-+ Django comes equipped with SQLite
-+ Django can connect to a variety of SQL engine backends
-+ In the setting.py file we can edit the ENGIN parameter used for DATABASE
-+ To create an actual model, we use a class structure inside the relevant applications models.py file
-+ Each attribute of the class represents a field, which is like a column name with constrains in SQL
-+ Each attribute has type of field and constraints.
-+ Models will reference each other to represent the table relationships.
-+ A foreign key denotes that the column coincides with a primary key of another table
+* We use Models to incorporate Database into a Django Project
+* Django comes equipped with SQLite
+* Django can connect to a variety of SQL engine backends
+* In the setting.py file we can edit the ENGIN parameter used for DATABASE
+* To create an actual model, we use a class structure inside the relevant applications models.py file
+* Each attribute of the class represents a field, which is like a column name with constrains in SQL
+* Each attribute has type of field and constraints.
+* Models will reference each other to represent the table relationships.
+* A foreign key denotes that the column coincides with a primary key of another table
 
-### 步骤: 
-
+### 步骤:
 
 ## 2. Django Admin
 
-+ 在setting.py中注册 app: first_app
+* 在setting.py中注册 app: first\_app
 
 ```
 INSTALLED_APPS = [
@@ -35,9 +34,9 @@ INSTALLED_APPS = [
 ]
 ```
 
-+ 添加model（数据表），atrribute（字段），字段类型，约束及外键
+* 添加model（数据表），atrribute（字段），字段类型，约束及外键
 
-```
+```py
 from django.db import models
 
 # Create your models here.
@@ -65,10 +64,9 @@ class AccessRecord(models.Model):
 
     def __str__(self):
         return str(self.date)
-
 ```
 
-+ 移植
+* 移植
 
 ```
 root@38c80f8e29c3:/code# python manage.py migrate
@@ -108,7 +106,7 @@ Running migrations:
   Applying first_app.0001_initial... OK
 ```
 
-+ 在对应app的admin.py中注册admin将要管理的模块：
+* 在对应app的admin.py中注册admin将要管理的模块：
 
 ```
 from django.contrib import admin
@@ -119,7 +117,7 @@ admin.site.register(Topic)
 admin.site.register(Webpage)
 ```
 
-+ 创建超级用户：（“root@38c80f8e29c3:/code” 说明当前主机是容器）
+* 创建超级用户：（“root@38c80f8e29c3:/code” 说明当前主机是容器）
 
 ```
 root@38c80f8e29c3:/code# python manage.py createsuperuser
@@ -130,7 +128,7 @@ Password (again):
 Superuser created successfully.
 ```
 
-+ 填充伪数据
+* 填充伪数据
 
 ```python
 import os
@@ -185,7 +183,7 @@ if __name__ == '__main__':
     print('Populating Complete')
 ```
 
-+ 执行populate_first_app.py
+* 执行populate\_first\_app.py
 
 ```
 root@c271100f853b:/code# python populate_first_app.py
@@ -194,3 +192,6 @@ Populating Complete
 ```
 
 ## Django MVC
+
+
+
