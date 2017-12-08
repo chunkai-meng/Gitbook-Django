@@ -34,6 +34,7 @@ psycopg2
 7. 保存requirements.txt
 8. 创建一个docker-compose.yml
 docker-compose.yml文件里描述了您的app所需要的服务。compose一词我认为翻译为编制更恰当。在这里我们需要一个web服务器，一个数据服务器。编制文件指明了我们这些服务所用的镜像，他们如何连接，哪些卷要挂载到容器。最后定义服务端口。
+
 ```
 version: '3'
 
@@ -50,6 +51,7 @@ services:
     depends_on:
       - db
 ```
+
 9. 保存 docker-compose.yml
 
 **创建一个Django项目**
