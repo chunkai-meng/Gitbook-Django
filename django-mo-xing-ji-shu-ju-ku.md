@@ -36,7 +36,6 @@
 
 * 添加model（数据表），atrribute（字段），字段类型，约束及外键
 
-  
 \`\`\`  
 from django.db import models
 
@@ -102,8 +101,9 @@ Migrations for 'first\_app':
 * Create model AccessRecord
 * Create model Topic
 * Create model Webpage
-* Add field name to accessrecord
-  \`\`\`
+* Add field name to accessrecor
+
+\`\`\`
 
 ```
 root@38c80f8e29c3:/code# python manage.py migrate
