@@ -20,7 +20,9 @@
 
 
 ## 2. Django Admin
+
 + 在setting.py中注册 app: first_app
+
 ```
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
 ```
 
 + 添加model（数据表），atrribute（字段），字段类型，约束及外键
+
 ```
 from django.db import models
 
@@ -66,6 +69,7 @@ class AccessRecord(models.Model):
 ```
 
 + 移植
+
 ```
 root@38c80f8e29c3:/code# python manage.py migrate
 Operations to perform:
@@ -86,7 +90,6 @@ Running migrations:
   Applying sessions.0001_initial... OK
 ```
 
-
 ```
 root@38c80f8e29c3:/code# python manage.py makemigrations first_app
 Migrations for 'first_app':
@@ -105,9 +108,8 @@ Running migrations:
   Applying first_app.0001_initial... OK
 ```
 
-
-
 + 在对应app的admin.py中注册admin将要管理的模块：
+
 ```
 from django.contrib import admin
 from first_app.models import AccessRecord, Topic, Webpage
@@ -118,6 +120,7 @@ admin.site.register(Webpage)
 ```
 
 + 创建超级用户：（“root@38c80f8e29c3:/code” 说明当前主机是容器）
+
 ```
 root@38c80f8e29c3:/code# python manage.py createsuperuser
 Username (leave blank to use 'root'): ck
@@ -128,6 +131,7 @@ Superuser created successfully.
 ```
 
 + 填充伪数据
+
 ```python
 import os
 # Configure settings for project
@@ -182,6 +186,7 @@ if __name__ == '__main__':
 ```
 
 + 执行populate_first_app.py
+
 ```
 root@c271100f853b:/code# python populate_first_app.py
 Populating the databases...Please Wait
