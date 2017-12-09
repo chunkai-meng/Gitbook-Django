@@ -191,7 +191,4 @@ Populating the databases...Please Wait
 Populating Complete
 ```
 
-## Django MVC
-
-
 
