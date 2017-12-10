@@ -224,16 +224,66 @@ def access(request):
 
 ```
 
-### 3. 
-
-
-### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
+### 7. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
 
 用 模版标记语言 template tagging 链接模型和Html page
 
+_Edit templates/first_app/access.html_
 
 
-### 5. 将相应的 URL 映射到新建的 View
+```html
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django Table</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/mystyle.css" %}">
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.png' %}">
+  </head>
+  <body>
+    <h1>Hi welcome to Django MTV !</h1>
+    <h2>test<h2>
+    <div class="djangotwo">
+	    {% if access_records %}
+        <table>
+          <thead>
+            <th>Site Name</th>
+            <th>Date Accessed</th>
+          </thead>
+          {% for acc in access_records %}
+          <tr>
+            <td>{{ acc.name }}</td>
+            <td>{{ acc.date }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>NO ACCESS RECORDS FOUND!</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
+```
+
+### 8. 将相应的 URL 映射到新建的 View
+
+_Edit first_app/urls.py_
+
+```
+from django.conf.urls import url
+from first_app import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^help/', views.help, name='help'),
+    url(r'^access/', views.access, name='access'),
+]
+
+```
+
+
 
 
 
