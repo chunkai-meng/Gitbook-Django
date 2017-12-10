@@ -3,22 +3,9 @@
 > 内容来源：[Python and Django Full Stack Web Developer Bootcamp](https://www.udemy.com/python-and-django-full-stack-web-developer-bootcamp/learn/v4/overview)
 > 翻译整理：CK
 
-## Django Models - Templates - Views
+## 1. 优点：
 
-
-### 1. 在 views 中 import 所有用到的 models
-
-
-### 2. 用 view 查询 model 获取所需数据
-
-
-### 3. 传送 model 结果到 template
-
-
-### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
-
-用 模版标记语言 template tagging 链接模型和Html page
-
-
-
-### 5. 将相应的 URL 映射到新建的 View
++ 快速生成 HTML 表单
++ 校验数据并转换成Python数据结构
++ 替Models创建表单式样
++ 快速从form更新models
