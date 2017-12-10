@@ -1,4 +1,6 @@
-# Django 模型及数据库
+# Django MTV
+
+> 内容来源：[Python and Django Full Stack Web Developer Bootcamp](https://www.udemy.com/python-and-django-full-stack-web-developer-bootcamp/learn/v4/overview)
 
 > 翻译整理：CK
 
@@ -18,9 +20,8 @@
 
 ### 步骤:
 
-## 2. Django Admin
 
-* 在setting.py中注册 app: first\_app
+### 1. 在setting.py中注册 app: first\_app
 
 ```
 INSTALLED_APPS = [
@@ -34,10 +35,12 @@ INSTALLED_APPS = [
 ]
 ```
 
-* 添加model（数据表），atrribute（字段），字段类型，约束及外键
+### 2. 添加model（数据表），atrribute（字段），字段类型，约束及外键  
+Edit first_app/models.py
 
-```
+```py
 from django.db import models
+
 
 # Create your models here.
 
@@ -105,6 +108,23 @@ Operations to perform:
 Running migrations:
   Applying first_app.0001_initial... OK
 ```
+
+### 1. 在 views 中 import 所有用到的 models
+
+
+### 2. 用 view 查询 model 获取所需数据
+
+
+### 3. 传送 model 结果到 template
+
+
+### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
+
+用 模版标记语言 template tagging 链接模型和Html page
+
+
+
+### 5. 将相应的 URL 映射到新建的 View
 
 * 在对应app的admin.py中注册admin将要管理的模块：
 
