@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 ```
 
 ### 2. 添加model（数据表），atrribute（字段），字段类型，约束及外键  
-Edit first_app/models.py
+_Edit first_app/models.py_
 
 ```py
 from django.db import models
@@ -69,7 +69,7 @@ class AccessRecord(models.Model):
         return str(self.date)
 ```
 
-* 移植
+### 3. 移植
 
 ```
 root@38c80f8e29c3:/code# python manage.py migrate
@@ -109,24 +109,7 @@ Running migrations:
   Applying first_app.0001_initial... OK
 ```
 
-### 1. 在 views 中 import 所有用到的 models
-
-
-### 2. 用 view 查询 model 获取所需数据
-
-
-### 3. 传送 model 结果到 template
-
-
-### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
-
-用 模版标记语言 template tagging 链接模型和Html page
-
-
-
-### 5. 将相应的 URL 映射到新建的 View
-
-* 在对应app的admin.py中注册admin将要管理的模块：
+### 4. 在对应app的admin.py中注册admin将要管理的模块：
 
 ```
 from django.contrib import admin
@@ -148,7 +131,7 @@ Password (again):
 Superuser created successfully.
 ```
 
-* 填充伪数据
+### 5. 填充伪数据
 
 ```py
 import os
@@ -210,5 +193,44 @@ root@c271100f853b:/code# python populate_first_app.py
 Populating the databases...Please Wait
 Populating Complete
 ```
+
+### 6. 在 views 中 import 所有用到的 models, 用 view 查询 model 获取所需数据
+
+```py
+from django.shortcuts import render
+# from django.http import HttpResponse
+from first_app.models import Topic, Webpage, AccessRecord
+
+# Create your views here.
+
+
+def index(request):
+    my_dict = {'insert_me': "Hello I am from first_app/index.html!"}
+    return render(request, 'first_app/index.html', context=my_dict)
+
+
+def help(request):
+    my_dict = {'insert_me': "Hello I am from first_app/help.html!"}
+    return render(request, 'first_app/help.html', context=my_dict)
+
+
+def access(request):
+    webpages_list = AccessRecord.objects.order_by('date')
+    date_dict = {'access_records': webpages_list}
+    return render(request, 'first_app/access.html', context=date_dict)
+
+```
+
+### 3. 传送 model 结果到 template
+
+
+### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
+
+用 模版标记语言 template tagging 链接模型和Html page
+
+
+
+### 5. 将相应的 URL 映射到新建的 View
+
 
 
