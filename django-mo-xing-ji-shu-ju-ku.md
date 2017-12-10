@@ -226,7 +226,7 @@ def access(request):
 
 ### 7. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
 
-用 模版标记语言 template tagging 链接模型和Html page
+用模版标记语言 template tagging 链接模型和Html page
 
 _Edit templates/first_app/access.html_
 
