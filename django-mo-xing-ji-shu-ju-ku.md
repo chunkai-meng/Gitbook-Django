@@ -194,7 +194,10 @@ Populating the databases...Please Wait
 Populating Complete
 ```
 
-### 6. 在 views 中 import 所有用到的 models, 用 view 查询 model 获取所需数据
+### 6. 编辑Views  
++ 在 views 中 import 所有用到的 models
++ 用 view 查询 model 获取所需数据
++ 传送 model 结果到 template
 
 ```py
 from django.shortcuts import render
@@ -221,7 +224,7 @@ def access(request):
 
 ```
 
-### 3. 传送 model 结果到 template
+### 3. 
 
 
 ### 4. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
