@@ -271,7 +271,7 @@ _Edit templates/first_app/access.html_
 
 _Edit first_app/urls.py_
 
-```
+```py
 from django.conf.urls import url
 from first_app import views
 
