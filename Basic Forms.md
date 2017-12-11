@@ -18,7 +18,6 @@
         text = forms.CharField(widget=forms.Textarea)
     ```
 
-
 2. **校验数据并转换成Python数据结构**
     
     在 views.py 中添加
@@ -44,10 +43,31 @@
     `form_name_view` 负责在client 请求网页（GET：默认）的时候提供 form 表单，
     也可在client 提交（POST）的时候处理提交上来的内容。
         
-+ **校验数据**
-    - 隐藏字段
-    - 校验
+3. **校验数据**
 
-+ **替Models创建表单式样**
-+ **快速从form更新models**
-+ **隐藏字段**
+```py
+from django import forms
+# 导入django.core 的 validators包
+from django.core import validators
+
+# 自定义校验方法
+def check_for_z(value):
+    if value[0].lower() != 'z':
+        raise forms.ValidationError("Name NEEDS TO START WITH Z")
+
+class FormName(forms.Form):
+    # 校验器是一个列表，可以有多个校验器（validator）
+    name = forms.CharField(validators=[check_for_z,])
+    email = forms.EmailField()
+    text = forms.CharField(widget=forms.Textarea)
+    # 在form 中添加一个隐藏的input 字段
+    botcatcher = forms.CharField(required=False, widget=forms.HiddenInput,
+                                validators=[validators.MaxLengthValidator(10)])
+        
+```    
+
+
+
+4. **替Models创建表单式样**
+5. **快速从form更新models**
+6. **隐藏字段**
