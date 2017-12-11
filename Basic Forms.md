@@ -66,8 +66,32 @@ class FormName(forms.Form):
         
 ```    
 
-
-
+4. **映射URL**
+    编辑：urls.py
+    ```py
+    url(r'^form/', views.form_name_view, name='form')
+    ```
 4. **替Models创建表单式样**
+    编辑 templates/first_app/form_name_view.html
+    ```
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Form Name View</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <form method="post" >
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" name="" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>
+    ```
+
 5. **快速从form更新models**
 6. **隐藏字段**
