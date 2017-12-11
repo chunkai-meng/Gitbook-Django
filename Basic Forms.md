@@ -45,26 +45,27 @@
         
 3. **校验数据**
 
-```py
-from django import forms
-# 导入django.core 的 validators包
-from django.core import validators
+    ```py
+    from django import forms
+    # 导入django.core 的 validators包
+    from django.core import validators
 
-# 自定义校验方法
-def check_for_z(value):
-    if value[0].lower() != 'z':
-        raise forms.ValidationError("Name NEEDS TO START WITH Z")
+    # 自定义校验方法
+    def check_for_z(value):
+        if value[0].lower() != 'z':
+            raise forms.ValidationError("Name NEEDS TO START WITH Z")
 
-class FormName(forms.Form):
-    # 校验器是一个列表，可以有多个校验器（validator）
-    name = forms.CharField(validators=[check_for_z,])
-    email = forms.EmailField()
-    text = forms.CharField(widget=forms.Textarea)
-    # 在form 中添加一个隐藏的input 字段
-    botcatcher = forms.CharField(required=False, widget=forms.HiddenInput,
-                                validators=[validators.MaxLengthValidator(10)])
+    class FormName(forms.Form):
+        # 校验器是一个列表，可以有多个校验器（validator）
+        name = forms.CharField(validators=[check_for_z,])
+        email = forms.EmailField()
+        text = forms.CharField(widget=forms.Textarea)
+        # 在form 中添加一个隐藏的input 字段
+        botcatcher = forms.CharField(required=False,
+                                     widget=forms.HiddenInput,
+                                    validators=[validators.MaxLengthValidator(10)])
         
-```    
+    ```    
 
 4. **映射URL**
     编辑：urls.py
@@ -73,18 +74,21 @@ class FormName(forms.Form):
     ```
 4. **替Models创建表单式样**
     编辑 templates/first_app/form_name_view.html
-    ```
-    <!DOCTYPE html>
+    ```html
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Form Name View</title>
+    <!-- 添加bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <div class="container">
       <form method="post" >
+        <!-- 将表单拆分成多个项 -->
         {{ form.as_p }}
+        <!-- 防止跨站点伪造请求 -->
         {% csrf_token %}
         <input type="submit" class="btn btn-primary" name="" value="Submit">
       </form>
@@ -94,4 +98,5 @@ class FormName(forms.Form):
     ```
 
 5. **快速从form更新models**
+
 6. **隐藏字段**
