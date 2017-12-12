@@ -283,7 +283,11 @@ urlpatterns = [
 
 ```
 
+### 9. 模板的重用
 
++ 找出项目中重复出现的页面
++ 创建 base.html 添加 base tag
++ 在需要的地方扩展 base tag 
 
 
 
