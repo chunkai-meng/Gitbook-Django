@@ -4,6 +4,7 @@
 
 > 翻译整理：CK
 
+相对 
 ```
 from django.conf.urls import url
 from . import views
