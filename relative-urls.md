@@ -4,18 +4,9 @@
 
 > 翻译整理：CK
 
-相对 
-```
-from django.conf.urls import url
-from . import views
+相对 URL 重点在以下三个文件：
 
-app_name = 'basic_app'
-urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^other', views.other, name='other'),
-]
-```
-
+**Views 基本没有变化**
 ```
 from django.shortcuts import render
 
@@ -31,8 +22,20 @@ def other(request):
 
 ```
 
+**在 urls.py 中添加 app_name**
+```
+from django.conf.urls import url
+from . import views
 
+app_name = 'basic_app'
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^other', views.other, name='other'),
+]
+```
 
+**templates/app/index.html 中将超链接地址写成template tag的形式**
+_注： app名:url名， url名在 urls.py中定义_
 ```html
 <!DOCTYPE html>
 <html>
