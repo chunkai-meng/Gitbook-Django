@@ -7,4 +7,6 @@
 * [4. 表单](chapter4-Form.md)
 * [5. Django MTV](django-mo-xing-ji-shu-ju-ku.md)
 * [6. Basic Forms](Basic Forms.md)
+* [ModelForm](modelform.md)
+* [Relative URLs](relative-urls.md)
 
