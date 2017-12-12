@@ -4,3 +4,5 @@
 
 > 翻译整理：CK
 
+**ModelForm 有点类似 ASP.Net Core 中的 ViewModel 的功能**
+区别可能在于
