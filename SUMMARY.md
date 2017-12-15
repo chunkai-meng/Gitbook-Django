@@ -10,5 +10,6 @@
 * [ModelForm](modelform.md)
 * [Relative URLs](relative-urls.md)
 * [Django VS ASP.Net Core](django-vs-aspnet-core.md)
-* template filter and custom filter
+* [template filter and custom filter](template-filter-and-custom-filter.md)
+* User Authentication
 
