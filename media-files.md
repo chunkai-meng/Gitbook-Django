@@ -2,7 +2,7 @@
 > [source](https://timmyomahony.com/blog/static-vs-media-and-root-vs-path-in-django/)
 
 in Main urls.py
-```
+```py
 from django.conf import settings
 from django.conf.urls.static import static
 
