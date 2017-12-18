@@ -13,4 +13,5 @@
 * [template filter and custom filter](template-filter-and-custom-filter.md)
 * User Authentication
 * [Using Conda](using-conda.md)
+* [Media Files](media-files.md)
 
