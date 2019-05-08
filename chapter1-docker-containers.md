@@ -59,7 +59,7 @@ services:
 1. 转到项目根目录
 1. 用docker-compose 创建项目
 ```
-docker-compose run web django-admin.py startproject composeexample . 
+docker-compose run web django-admin.py startproject composeexample .
 ```
 docker将启动web容器，并在里面执行 django-admin.py startproject composeexample，因为web镜像不存在所以compose先从当前目录建立它，见 build: 因为挂在了当前目录，所以新创建的项目文件在`docker-compose run`执行完推出后可以看到
 3. ls 项目目录
@@ -71,7 +71,7 @@ $ ls -l
  -rwxr-xr-x 1 root   root   manage.py
  -rw-rw-r-- 1 user   user   requirements.txt
  ```
- 
+
  **连接数据库**
 1. 打开composeexample/settings.py
 1. 替换DATABASE = …项
@@ -84,7 +84,7 @@ DATABASES = {
         'HOST': 'db',
         'PORT': 5432,
     }
-} 
+}
 ```
 这些参数是根据docker-compose.yml所指定的postgres Docker 镜像决定的。
 3. 保存
@@ -118,8 +118,8 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago      Up 9 minutes        0.0.0.0:8000->8000/tcp   django_web_1
 678ce61c79cc        postgres            "docker-entrypoint..."   20 minutes ago      Up 9 minutes        5432/tcp                 django_db_1
 ```
-6. 关闭容器  
-Ctrl-C  
+6. 关闭容器
+Ctrl-C
 或者新开一个terminal执行： `docker-compose down`
 
 ## **部署已有的项目到容器**

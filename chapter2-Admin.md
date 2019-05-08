@@ -1,7 +1,7 @@
 # Mac Docker 创建第一个Django 应用，Part 2
 
-> 原文：[Writing your first Django app, part 2](https://docs.djangoproject.com/en/1.11/intro/tutorial02/)  
-> 本文Python搭建在 Django Compose + Djang 执行Python需进入web server容器中，请参看\[第一步：在Mac构建Django 容器\]  
+> 原文：[Writing your first Django app, part 2](https://docs.djangoproject.com/en/1.11/intro/tutorial02/)
+> 本文Python搭建在 Django Compose + Djang 执行Python需进入web server容器中，请参看\[第一步：在Mac构建Django 容器\]
 > 翻译整理：CK
 
 ## Part 2：配置后端
@@ -115,7 +115,7 @@ INSTALLED_APPS = [
 $ python manage.py makemigrations polls
 ```
 
-makemigrations 告诉Django你对模型做了些修改，并并希望保存下来。Django会创建修改脚本polls/migrations/0001\_initial.py，  
+makemigrations 告诉Django你对模型做了些修改，并并希望保存下来。Django会创建修改脚本polls/migrations/0001\_initial.py，
 应该会看到类似：
 
 ```
@@ -164,10 +164,10 @@ Running migrations:
   Applying polls.0001_initial... OK
 ```
 
-小结：  
-修改数据库分三步：  
-1. 修改模型 \(in models.py\).  
-1. 执行: `python manage.py makemigrations` 创建一个迁移  
+小结：
+修改数据库分三步：
+1. 修改模型 \(in models.py\).
+1. 执行: `python manage.py makemigrations` 创建一个迁移
 1. 执行：`python manage.py migrate` 保存变更
 
 ### 4. API
@@ -221,7 +221,7 @@ datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
 <QuerySet [<Question: Question object>]>
 ```
 
-为了让`<Question: Question object>`输出更可读  
+为了让`<Question: Question object>`输出更可读
 给模块Question and Choice \(in the polls/models.py file\) 添加 `__str__()` 方法
 
 ```py
@@ -398,7 +398,7 @@ admin.site.register(Question)
 
 ![image](https://docs.djangoproject.com/en/1.11/_images/admin05t.png)
 
-如果选择时间**Now**的时候发现时间不对，那可能就是时区问题。  
+如果选择时间**Now**的时候发现时间不对，那可能就是时区问题。
 检查之前的设置`mysite/setting.py` 例如：
 
 ```
