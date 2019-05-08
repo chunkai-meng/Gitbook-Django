@@ -100,7 +100,7 @@ def index(request):
 ```
 这段代码加载**polls/templates/polls/index.html** 并传入一个context。这个context是一个字典，将模版的变量名映射为Pyhon对象。
 
-### 一个快捷的render() 方法，常见的做法是载入模版，填入上下文，返回一个包含了渲染后之模版的HttpResponse对象。Django提供一个捷径如下：
+一个快捷的render() 方法，常见的做法是载入模版，填入上下文，返回一个包含了渲染后之模版的HttpResponse对象。Django提供一个捷径如下：
 重写**polls/views.py**
 ```
 from django.shortcuts import render

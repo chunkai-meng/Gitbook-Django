@@ -1,4 +1,6 @@
-# Django 模型及数据库
+# Django MVT
+
+> 内容来源：[Python and Django Full Stack Web Developer Bootcamp](https://www.udemy.com/python-and-django-full-stack-web-developer-bootcamp/learn/v4/overview)
 
 > 翻译整理：CK
 > Updated: 09/05/2019
@@ -19,9 +21,8 @@
 
 ### 步骤:
 
-## 2. Django Admin
 
-* 在setting.py中注册 app: first\_app
+### 1. 在setting.py中注册 app: first\_app
 
 ```
 INSTALLED_APPS = [
@@ -35,10 +36,12 @@ INSTALLED_APPS = [
 ]
 ```
 
-* 添加model（数据表），atrribute（字段），字段类型，约束及外键
+### 2. 添加model（数据表），atrribute（字段），字段类型，约束及外键  
+_Edit first_app/models.py_
 
-```
+```py
 from django.db import models
+
 
 # Create your models here.
 
@@ -67,7 +70,7 @@ class AccessRecord(models.Model):
         return str(self.date)
 ```
 
-* 移植
+### 3. 移植
 
 ```
 root@38c80f8e29c3:/code# python manage.py migrate
@@ -107,7 +110,7 @@ Running migrations:
   Applying first_app.0001_initial... OK
 ```
 
-* 在对应app的admin.py中注册admin将要管理的模块：
+### 4. 在对应app的admin.py中注册admin将要管理的模块：
 
 ```
 from django.contrib import admin
@@ -129,7 +132,7 @@ Password (again):
 Superuser created successfully.
 ```
 
-* 填充伪数据
+### 5. 填充伪数据
 
 ```py
 import os
@@ -192,7 +195,100 @@ Populating the databases...Please Wait
 Populating Complete
 ```
 
-## Django MVC
+### 6. 编辑Views  
++ 在 views 中 import 所有用到的 models
++ 用 view 查询 model 获取所需数据
++ 传送 model 结果到 template
+
+```py
+from django.shortcuts import render
+# from django.http import HttpResponse
+from first_app.models import Topic, Webpage, AccessRecord
+
+# Create your views here.
+
+
+def index(request):
+    my_dict = {'insert_me': "Hello I am from first_app/index.html!"}
+    return render(request, 'first_app/index.html', context=my_dict)
+
+
+def help(request):
+    my_dict = {'insert_me': "Hello I am from first_app/help.html!"}
+    return render(request, 'first_app/help.html', context=my_dict)
+
+
+def access(request):
+    webpages_list = AccessRecord.objects.order_by('date')
+    date_dict = {'access_records': webpages_list}
+    return render(request, 'first_app/access.html', context=date_dict)
+
+```
+
+### 7. 编辑 template 来接收来自 model 的数据并按设计的式样展示。
+
+用模版标记语言 template tagging 链接模型和Html page
+
+_Edit templates/first_app/access.html_
+
+
+```html
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Django Table</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/mystyle.css" %}">
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.png' %}">
+  </head>
+  <body>
+    <h1>Hi welcome to Django MTV !</h1>
+    <h2>test<h2>
+    <div class="djangotwo">
+	    {% if access_records %}
+        <table>
+          <thead>
+            <th>Site Name</th>
+            <th>Date Accessed</th>
+          </thead>
+          {% for acc in access_records %}
+          <tr>
+            <td>{{ acc.name }}</td>
+            <td>{{ acc.date }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>NO ACCESS RECORDS FOUND!</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
+```
+
+### 8. 将相应的 URL 映射到新建的 View
+
+_Edit first_app/urls.py_
+
+```py
+from django.conf.urls import url
+from first_app import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^help/', views.help, name='help'),
+    url(r'^access/', views.access, name='access'),
+]
+
+```
+
+### 9. 模板的重用
+
++ 找出项目中重复出现的页面
++ 创建 base.html 添加 base tag
++ 在需要的地方扩展 base tag 
 
 
 
